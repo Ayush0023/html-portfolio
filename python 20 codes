@@ -1,0 +1,140 @@
+# ============================
+# 20 Big Python Programs in One
+# ============================
+
+def calculator():
+    while True:
+        print("\n--- Calculator ---")
+        print("1. Add  2. Subtract  3. Multiply  4. Divide  5. Exit")
+        choice = int(input("Enter choice: "))
+        if choice == 5: break
+        a, b = float(input("First: ")), float(input("Second: "))
+        if choice == 1: print("Result:", a+b)
+        elif choice == 2: print("Result:", a-b)
+        elif choice == 3: print("Result:", a*b)
+        elif choice == 4: print("Result:", a/b if b!=0 else "Error!")
+
+def student_marks():
+    students = {"Rahul":85, "Neha":92, "Amit":76}
+    print("\n--- Student Marks ---")
+    for k,v in students.items():
+        print(f"{k}: {v}")
+
+def library_system():
+    library = {"Python101":"Available","DS":"Issued"}
+    print("\n--- Library ---")
+    print(library)
+
+def atm():
+    balance = 1000
+    while True:
+        print("\n--- ATM ---")
+        print("1. Balance  2. Deposit  3. Withdraw  4. Exit")
+        ch = int(input("Choice: "))
+        if ch==1: print("Balance:", balance)
+        elif ch==2: balance+=int(input("Deposit: "))
+        elif ch==3:
+            amt=int(input("Withdraw: "))
+            balance=balance-amt if amt<=balance else balance
+        else: break
+
+def tic_tac_toe():
+    board=[' ']*9
+    turn='X'
+    for _ in range(9):
+        print(f"{board[0]}|{board[1]}|{board[2]}\n-+-+-\n{board[3]}|{board[4]}|{board[5]}\n-+-+-\n{board[6]}|{board[7]}|{board[8]}")
+        move=int(input(f"Player {turn} (0-8): "))
+        if board[move]==' ': board[move]=turn; turn='O' if turn=='X' else 'X'
+
+class BankAccount:
+    def __init__(self,name,bal=0): self.name,self.bal=name,bal
+    def deposit(self,amt): self.bal+=amt
+    def withdraw(self,amt): self.bal-=amt if amt<=self.bal else print("Insufficient!")
+    def show(self): print(f"{self.name} Balance: {self.bal}")
+
+def contact_book():
+    contacts={"Rahul":"9876","Neha":"9123"}
+    print("\n--- Contacts ---")
+    for n,p in contacts.items(): print(n,p)
+
+def todo():
+    tasks=["Complete homework","Buy groceries"]
+    print("\n--- To-Do List ---")
+    for i,t in enumerate(tasks,1): print(i,".",t)
+
+def primes():
+    print("\n--- Primes 1-50 ---")
+    for i in range(2,51):
+        if all(i%j!=0 for j in range(2,int(i**0.5)+1)): print(i,end=" ")
+
+def sort_students():
+    students=[("Rahul",85),("Neha",92),("Amit",78)]
+    print("\n--- Sorted Students ---")
+    print(sorted(students,key=lambda x:x[1],reverse=True))
+
+def quiz():
+    q={"Capital of India?":"Delhi","5+7?":"12"}
+    for k,v in q.items():
+        ans=input(k+" ")
+        print("Correct!" if ans==v else "Wrong!")
+
+def fibonacci(n=10):
+    a,b=0,1
+    print("\n--- Fibonacci ---")
+    for _ in range(n): print(a,end=" "); a,b=b,a+b
+
+def factorial(n=5):
+    f=1
+    for i in range(1,n+1): f*=i
+    print(f"\n--- Factorial of {n} = {f}")
+
+def palindrome():
+    s="madam"
+    print("\n--- Palindrome ---")
+    print(s,"is palindrome" if s==s[::-1] else "not palindrome")
+
+def word_count():
+    text="hello world hello python"
+    counts={}
+    for w in text.split(): counts[w]=counts.get(w,0)+1
+    print("\n--- Word Count ---")
+    print(counts)
+
+def file_handling():
+    with open("sample.txt","w") as f: f.write("Hello Python!")
+    with open("sample.txt","r") as f: print("\n--- File Content ---\n",f.read())
+
+def number_guess():
+    import random
+    num=random.randint(1,10)
+    guess=int(input("\nGuess (1-10): "))
+    print("Correct!" if guess==num else f"Wrong! Number was {num}")
+
+def matrix_add():
+    A=[[1,2],[3,4]];B=[[5,6],[7,8]]
+    res=[[A[i][j]+B[i][j] for j in range(2)] for i in range(2)]
+    print("\n--- Matrix Sum ---\n",res)
+
+def string_reverse():
+    s="Python"
+    print("\n--- String Reverse ---")
+    print(s[::-1])
+
+def main_menu():
+    programs=[calculator,student_marks,library_system,atm,tic_tac_toe,
+              lambda: BankAccount("Rahul",500).show(),contact_book,todo,primes,
+              sort_students,quiz,fibonacci,factorial,palindrome,word_count,
+              file_handling,number_guess,matrix_add,string_reverse]
+    
+    while True:
+        print("\n===== MAIN MENU (20 Programs) =====")
+        for i,p in enumerate(programs,1): print(i,p.__name__)
+        print("0. Exit")
+        ch=int(input("Choose program: "))
+        if ch==0: break
+        elif 1<=ch<=len(programs): programs[ch-1]()
+        else: print("Invalid!")
+
+# Run main menu
+if __name__=="__main__":
+    main_menu()
